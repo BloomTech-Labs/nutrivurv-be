@@ -1,0 +1,147 @@
+# import UserOrderByInput from './generated/prisma.graphql'
+
+type Query {
+  users(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: UserOrderByInput
+  ): [User!]!
+  me: User!
+  myProfile: Profile!
+  myDailyRecords: [DailyRecord!]!
+}
+
+type Mutation {
+  createUser(data: CreateUserInput!): AuthPayload!
+  login(data: LoginUserInput!): AuthPayload!
+  deleteUser: User!
+  updateUser(data: UpdateUserInput!): User!
+  createProfile(data: CreateProfileInput!): Profile!
+  updateProfile(data: UpdateProfileInput!): Profile!
+  deleteProfile: Profile!
+  createDailyRecord(data: CreateDailyRecordInput!): DailyRecord!
+  updateDailyRecord(id: String! data: UpdateDailyRecordInput!): DailyRecord!
+  deleteDailyRecord(id: String! ): DailyRecord!
+}
+
+# type Subscription {
+
+# }
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+input UpdateDailyRecordInput {
+  date: String
+  current_weight: Int
+  calories: Int
+  fat: Int
+  carbs: Int
+  fiber: Int
+  protein: Int
+  food_string: String
+}
+
+input UpdateProfileInput {
+  age: Int
+  weight: Int
+  height: Int
+  paleo: Boolean
+  keto: Boolean
+  veg: Boolean
+  fat: Int
+  carbs: Int
+  protein: Int
+  fiber: Int
+  calories: Int
+}
+
+input CreateDailyRecordInput {
+  date: String!
+  current_weight: Int!
+  calories: Int!
+  fat: Int!
+  carbs: Int!
+  fiber: Int!
+  protein: Int!
+  food_string: String!
+}
+
+input CreateProfileInput {
+  age: Int!
+  weight: Int!
+  height: Int!
+  paleo: Boolean
+  keto: Boolean
+  veg: Boolean
+  fat: Int!
+  carbs: Int!
+  protein: Int!
+  fiber: Int!
+  calories: Int!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String
+  updatedAt: String!
+  createdAt: String!
+  profile: Profile!
+}
+
+type Profile {
+  id: ID!
+  age: Int!
+  weight: Int!
+  height: Int!
+  paleo: Boolean
+  keto: Boolean
+  veg: Boolean
+  fat: Int!
+  carbs: Int!
+  protein: Int!
+  fiber: Int!
+  calories: Int!
+  updatedAt: String!
+  createdAt: String!
+}
+
+type DailyRecord {
+  id: ID!
+  date: String!
+  current_weight: Int!
+  calories: Int!
+  fat: Int!
+  carbs: Int!
+  fiber: Int!
+  protein: Int!
+  food_string: String!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}

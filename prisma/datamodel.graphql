@@ -1,0 +1,44 @@
+type User {
+  id: ID! @unique @id
+  name: String!
+  email: String! @unique
+  password: String!
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+  profile: Profile @relation(name: "ProfileToUser", onDelete: CASCADE)
+  daily_records: [DailyRecord!]
+    @relation(name: "DailyToUser", onDelete: CASCADE)
+}
+
+type Profile {
+  id: ID! @unique @id
+  user_id: String! @unique
+  age: Int!
+  weight: Int!
+  height: Int!
+  paleo: Boolean
+  keto: Boolean
+  veg: Boolean
+  fat: Int!
+  carbs: Int!
+  protein: Int!
+  fiber: Int!
+  calories: Int!
+  user: User! @relation(link: INLINE, name: "ProfileToUser", onDelete: SET_NULL)
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
+
+type DailyRecord {
+  id: ID! @unique @id
+  user_id: String! @unique
+  date: String!
+  current_weight: Int!
+  calories: Int!
+  fat: Int!
+  carbs: Int!
+  fiber: Int!
+  protein: Int!
+  food_string: String!
+  user: User! @relation(link: INLINE, name: "DailyToUser", onDelete: SET_NULL)
+}
