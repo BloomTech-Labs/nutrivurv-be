@@ -31,7 +31,7 @@ type Profile {
 
 type DailyRecord {
   id: ID! @unique @id
-  user_id: String! @unique
+  user_id: String!
   date: String!
   current_weight: Int!
   calories: Int!
@@ -41,4 +41,6 @@ type DailyRecord {
   protein: Int!
   food_string: String!
   user: User! @relation(link: INLINE, name: "DailyToUser", onDelete: SET_NULL)
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
 }
