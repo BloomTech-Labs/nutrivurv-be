@@ -108,6 +108,8 @@ type User {
   email: String
   updatedAt: String!
   createdAt: String!
+  profile: Profile
+  dailyRecords: [DailyRecord!]
 }
 
 type Profile {
