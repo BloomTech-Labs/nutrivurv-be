@@ -11,6 +11,8 @@ type Query {
   me: User!
   myProfile: Profile!
   myDailyRecords: [DailyRecord!]!
+  user(id: String!): User!
+  myRecipes: [CustomRecipe!]
 }
 
 type Mutation {
@@ -22,8 +24,8 @@ type Mutation {
   updateProfile(data: UpdateProfileInput!): Profile!
   deleteProfile: Profile!
   createDailyRecord(data: CreateDailyRecordInput!): DailyRecord!
-  updateDailyRecord(id: String! data: UpdateDailyRecordInput!): DailyRecord!
-  deleteDailyRecord(id: String! ): DailyRecord!
+  updateDailyRecord(id: String!, data: UpdateDailyRecordInput!): DailyRecord!
+  deleteDailyRecord(id: String!): DailyRecord!
 }
 
 # type Subscription {
@@ -139,6 +141,12 @@ type DailyRecord {
   fiber: Int!
   protein: Int!
   food_string: String!
+}
+
+type CustomRecipe {
+  id: ID!
+  user_id: String!
+  portions: Int!
 }
 
 enum MutationType {

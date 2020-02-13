@@ -59,15 +59,29 @@ const Mutation = {
   },
   async deleteDailyRecord(parent, args, { prisma, request }, info) {
     const userId = getUserId(request);
-    return prisma.mutation.deleteDailyRecord(
-      {
+
+    if (userId) {
+      const recordExists = await prisma.query.dailyRecords({
         where: {
           id: args.id
-        },
-        data: args.data
-      },
-      info
-    );
+        }
+      });
+      if (recordExists[0].user_id == userId) {
+        return prisma.mutation.deleteDailyRecord(
+          {
+            where: {
+              id: args.id
+            },
+            data: args.data
+          },
+          info
+        );
+      } else {
+        throw new Error("Can't find record with that ID");
+      }
+    } else {
+      throw new Error("Can't find record with that ID");
+    }
   },
   async updateUser(parent, args, { prisma, request }, info) {
     const userId = getUserId(request);
@@ -101,15 +115,29 @@ const Mutation = {
   },
   async updateDailyRecord(parent, args, { prisma, request }, info) {
     const userId = getUserId(request);
-    return prisma.mutation.updateDailyRecord(
-      {
+
+    if (userId) {
+      const recordExists = await prisma.query.dailyRecords({
         where: {
           id: args.id
-        },
-        data: args.data
-      },
-      info
-    );
+        }
+      });
+      if (recordExists[0].user_id == userId) {
+        return prisma.mutation.updateDailyRecord(
+          {
+            where: {
+              id: args.id
+            },
+            data: args.data
+          },
+          info
+        );
+      } else {
+        throw new Error("Can't find record with that ID");
+      }
+    } else {
+      throw new Error("Can't find record with that ID");
+    }
   },
   async createProfile(parent, args, { prisma, request }, info) {
     const userId = getUserId(request);

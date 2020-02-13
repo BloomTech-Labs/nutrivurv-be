@@ -47,6 +47,32 @@ const Query = {
         user_id: userId
       }
     });
+  },
+  user(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+
+    if (userId) {
+      return prisma.query.user({
+        where: {
+          id: args.id
+        }
+      });
+    } else {
+      throw new Error("Can't find user");
+    }
+  },
+  myRecipes(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+
+    if (userId) {
+      return prisma.query.customRecipes({
+        where: {
+          user_id: userId
+        }
+      });
+    } else {
+      return null;
+    }
   }
 };
 

@@ -8,6 +8,7 @@ type User {
   profile: Profile @relation(name: "ProfileToUser", onDelete: CASCADE)
   daily_records: [DailyRecord!]
     @relation(name: "DailyToUser", onDelete: CASCADE)
+  custom_recipes: [CustomRecipe!] @relation(name: "RecipeToUser", onDelete: CASCADE)
 }
 
 type Profile {
@@ -43,4 +44,11 @@ type DailyRecord {
   user: User! @relation(link: INLINE, name: "DailyToUser", onDelete: SET_NULL)
   updatedAt: DateTime! @updatedAt
   createdAt: DateTime! @createdAt
+}
+
+type CustomRecipe {
+  id: ID! @unique @id
+  user_id: String!
+  portions: Int!
+  user: User! @relation(link: INLINE, name: "RecipeToUser", onDelete: SET_NULL)
 }
