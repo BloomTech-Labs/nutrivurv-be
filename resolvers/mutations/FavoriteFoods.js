@@ -1,7 +1,7 @@
 const FavoriteFoods = {
   async deleteFavoriteFood(parent, args, { prisma, request }, info) {
     const recordExists = prisma.exists.FavoriteFood({
-      id: args.id
+      id: args.id,
     });
     if (!recordExists) {
       throw new Error("Can't find record with that ID");
@@ -9,9 +9,9 @@ const FavoriteFoods = {
     return prisma.mutation.deleteFavoriteFood(
       {
         where: {
-          id: args.id
+          id: args.id,
         },
-        data: args.data
+        data: args.data,
       },
       info
     );
@@ -20,16 +20,16 @@ const FavoriteFoods = {
     if (request.user_id) {
       const recordExists = await prisma.query.favoriteFoods({
         where: {
-          id: args.id
-        }
+          id: args.id,
+        },
       });
       if (recordExists[0].user_id == request.user_id) {
         return prisma.mutation.updateFavoriteFood(
           {
             where: {
-              id: args.id
+              id: args.id,
             },
-            data: args.data
+            data: args.data,
           },
           info
         );
@@ -48,14 +48,14 @@ const FavoriteFoods = {
           user_id: request.user_id,
           user: {
             connect: {
-              id: request.user_id
-            }
-          }
-        }
+              id: request.user_id,
+            },
+          },
+        },
       },
       info
     );
-  }
+  },
 };
 
 export default FavoriteFoods;

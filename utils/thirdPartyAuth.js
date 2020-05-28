@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require('axios');
 
 function ThirdPartyAuth(token) {
   return axios
@@ -9,7 +9,7 @@ function ThirdPartyAuth(token) {
       return res.data;
     })
     .catch((err) => {
-      throw new Error("ThirdPartyAuth Userinfo Failed", err);
+      throw new Error('ThirdPartyAuth Userinfo Failed', err);
     });
 }
 

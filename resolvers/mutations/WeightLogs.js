@@ -7,10 +7,10 @@ const WeightLogs = {
           user_id: request.user_id,
           user: {
             connect: {
-              id: request.user_id
-            }
-          }
-        }
+              id: request.user_id,
+            },
+          },
+        },
       },
       info
     );
@@ -19,16 +19,16 @@ const WeightLogs = {
     if (request.user_id) {
       const weightLogExists = await prisma.query.weightLog({
         where: {
-          id: args.id
-        }
+          id: args.id,
+        },
       });
       if (weightLogExists.user_id == request.user_id) {
         return prisma.mutation.updateWeightLog(
           {
             where: {
-              id: args.id
+              id: args.id,
             },
-            data: args.data
+            data: args.data,
           },
           info
         );
@@ -43,15 +43,15 @@ const WeightLogs = {
     if (request.user_id) {
       const weightLogExists = await prisma.query.weightLog({
         where: {
-          id: args.id
-        }
+          id: args.id,
+        },
       });
       if (weightLogExists.user_id == request.user_id) {
         return prisma.mutation.deleteWeightLog(
           {
             where: {
-              id: args.id
-            }
+              id: args.id,
+            },
           },
           info
         );
@@ -61,7 +61,7 @@ const WeightLogs = {
     } else {
       throw new Error("Can't find WeightLog with that ID");
     }
-  }
+  },
 };
 
 export default WeightLogs;

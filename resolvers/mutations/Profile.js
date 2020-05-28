@@ -9,9 +9,9 @@ const Profile = {
     return prisma.mutation.updateProfile(
       {
         where: {
-          user_id: request.user_id
+          user_id: request.user_id,
         },
-        data: args.data
+        data: args.data,
       },
       info
     );
@@ -24,14 +24,14 @@ const Profile = {
           user_id: request.user_id,
           user: {
             connect: {
-              id: request.user_id
-            }
-          }
-        }
+              id: request.user_id,
+            },
+          },
+        },
       },
       info
     );
-  }
+  },
 };
 
 export default Profile;

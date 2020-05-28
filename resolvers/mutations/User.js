@@ -1,8 +1,8 @@
-import thirdPartyAuth from "../../utils/thirdPartyAuth.js";
+import thirdPartyAuth from '../../utils/thirdPartyAuth.js';
 
-import generateToken from "../../utils/generateToken.js";
-import hashPassword from "../../utils/hashPassword.js";
-import validateLogin from "../../utils/validateLogin.js";
+import generateToken from '../../utils/generateToken.js';
+import hashPassword from '../../utils/hashPassword.js';
+import validateLogin from '../../utils/validateLogin.js';
 
 const User = {
   async createUser(parent, args, { request, prisma }, info) {
@@ -10,7 +10,7 @@ const User = {
 
     const auth0User = auth0Token
       ? await thirdPartyAuth(request.request.headers.auth0)
-      : "";
+      : '';
 
     args.data = auth0User
       ? {
@@ -40,7 +40,7 @@ const User = {
 
     const auth0User = auth0Token
       ? await thirdPartyAuth(request.request.headers.auth0)
-      : "";
+      : '';
 
     const user = await prisma.query.user({
       where: {
@@ -61,7 +61,7 @@ const User = {
     );
   },
   async updateUser(parent, args, { prisma, request }, info) {
-    if (typeof args.data.password === "string") {
+    if (typeof args.data.password === 'string') {
       args.data.password = await hashPassword(args.data.password);
     }
 

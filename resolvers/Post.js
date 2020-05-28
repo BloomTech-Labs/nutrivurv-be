@@ -1,12 +1,12 @@
 const Post = {
   comments: {
-    fragment: "fragment userId on User { id }",
+    fragment: 'fragment userId on User { id }',
     resolve(parent, args, { prisma, request }, info) {
       if (request.user_id) {
         return prisma.query.comments({
           where: {
             post: {
-              id: parent.id
+              id: parent.id,
             },
           },
         });
@@ -16,7 +16,7 @@ const Post = {
     },
   },
   user: {
-    fragment: "fragment userId on User { id }",
+    fragment: 'fragment userId on User { id }',
     resolve(parent, args, { prisma, request }, info) {
       if (request.user_id) {
         return prisma.query.user({

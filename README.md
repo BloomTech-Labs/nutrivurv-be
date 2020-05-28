@@ -33,7 +33,7 @@ To get the server running locally:
 
 - `yarn test` to start server using testing environment
 
-### Backend framework goes here
+- `yarn lint:fix` to run linter and fix linting errors
 
 - We are using PostgreSQL as our database to comply with engineering standards documentation and because it is one of the most full featured open source DB platforms.
 
@@ -115,9 +115,9 @@ Remember that this project is licensed under the MIT license, and by submitting 
 
 - Ensure that your code conforms to our existing code conventions and test coverage.
 
-- Include the relevant issue number, if applicable.
+- Ensure that your code coforms to code style guide lines by linting your code.
 
-- You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
+- Include the relevant issue number, if applicable.
 
 ### Attribution
 

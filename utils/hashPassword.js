@@ -1,9 +1,9 @@
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs');
 
-const hashPassword = password => {
+const hashPassword = (password) => {
   if (password.length < 8 && password.length > 16) {
     throw new Error(
-      "Password must be greater than 8 characters and less than 16 characters"
+      'Password must be greater than 8 characters and less than 16 characters'
     );
   }
 

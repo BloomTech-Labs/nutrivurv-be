@@ -7,10 +7,10 @@ const CustomIngredient = {
           user_id: request.user_id,
           user: {
             connect: {
-              id: request.user_id
-            }
-          }
-        }
+              id: request.user_id,
+            },
+          },
+        },
       },
       info
     );
@@ -19,15 +19,15 @@ const CustomIngredient = {
     if (request.user_id) {
       const ingredientExists = await prisma.query.customIngredients({
         where: {
-          id: args.id
-        }
+          id: args.id,
+        },
       });
       if (ingredientExists[0].user_id == request.user_id) {
         return prisma.mutation.deleteCustomIngredient(
           {
             where: {
-              id: args.id
-            }
+              id: args.id,
+            },
           },
           info
         );
@@ -42,16 +42,16 @@ const CustomIngredient = {
     if (request.user_id) {
       const ingredientExists = await prisma.query.customIngredients({
         where: {
-          id: args.id
-        }
+          id: args.id,
+        },
       });
       if (ingredientExists[0].user_id == request.user_id) {
         return prisma.mutation.updateCustomIngredient(
           {
             where: {
-              id: args.id
+              id: args.id,
             },
-            data: args.data
+            data: args.data,
           },
           info
         );
@@ -61,7 +61,7 @@ const CustomIngredient = {
     } else {
       throw new Error("Can't find Ingredient with that ID");
     }
-  }
+  },
 };
 
 export default CustomIngredient;

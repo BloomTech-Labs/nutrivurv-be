@@ -1,7 +1,7 @@
 const DailyRecord = {
   async deleteDailyRecord(parent, args, { prisma, request }, info) {
     const recordExists = prisma.exists.DailyRecord({
-      id: args.id
+      id: args.id,
     });
     if (!recordExists) {
       throw new Error("Can't find record with that ID");
@@ -9,9 +9,9 @@ const DailyRecord = {
     return prisma.mutation.deleteDailyRecord(
       {
         where: {
-          id: args.id
+          id: args.id,
         },
-        data: args.data
+        data: args.data,
       },
       info
     );
@@ -21,16 +21,16 @@ const DailyRecord = {
     if (request.user_id) {
       const recordExists = await prisma.query.dailyRecords({
         where: {
-          id: args.id
-        }
+          id: args.id,
+        },
       });
       if (recordExists[0].user_id == request.user_id) {
         return prisma.mutation.updateDailyRecord(
           {
             where: {
-              id: args.id
+              id: args.id,
             },
-            data: args.data
+            data: args.data,
           },
           info
         );
@@ -50,14 +50,14 @@ const DailyRecord = {
           user_id: request.user_id,
           user: {
             connect: {
-              id: request.user_id
-            }
-          }
-        }
+              id: request.user_id,
+            },
+          },
+        },
       },
       info
     );
-  }
+  },
 };
 
 export default DailyRecord;

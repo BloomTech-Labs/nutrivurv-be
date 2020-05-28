@@ -4,16 +4,16 @@ const Users = {
       first: args.first,
       skip: args.skip,
       after: args.after,
-      orderBy: args.orderBy
+      orderBy: args.orderBy,
     };
 
     if (args.query) {
       opArgs.where = {
         OR: [
           {
-            name_contains: args.query
-          }
-        ]
+            name_contains: args.query,
+          },
+        ],
       };
     }
 
@@ -22,21 +22,21 @@ const Users = {
   me(parent, args, { prisma, request }, info) {
     return prisma.query.user({
       where: {
-        id: request.user_id
-      }
+        id: request.user_id,
+      },
     });
   },
   user(parent, args, { prisma, request }, info) {
     if (request.user_id) {
       return prisma.query.user({
         where: {
-          id: args.id
-        }
+          id: args.id,
+        },
       });
     } else {
       throw new Error("Can't find user");
     }
-  }
+  },
 };
 
 export default Users;

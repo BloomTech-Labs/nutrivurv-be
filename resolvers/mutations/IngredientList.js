@@ -7,15 +7,15 @@ const IngredientList = {
           user_id: request.user_id,
           user: {
             connect: {
-              id: request.user_id
-            }
+              id: request.user_id,
+            },
           },
           recipe: {
             connect: {
-              id: args.data.recipe_id
-            }
-          }
-        }
+              id: args.data.recipe_id,
+            },
+          },
+        },
       },
       info
     );
@@ -24,16 +24,16 @@ const IngredientList = {
     if (request.user_id) {
       const ingredientListExists = await prisma.query.ingredientList({
         where: {
-          id: args.id
-        }
+          id: args.id,
+        },
       });
       if (ingredientListExists.user_id == request.user_id) {
         return prisma.mutation.updateIngredientList(
           {
             where: {
-              id: args.id
+              id: args.id,
             },
-            data: args.data
+            data: args.data,
           },
           info
         );
@@ -48,15 +48,15 @@ const IngredientList = {
     if (request.user_id) {
       const ingredientListExist = await prisma.query.ingredientList({
         where: {
-          id: args.id
-        }
+          id: args.id,
+        },
       });
       if (ingredientListExist[0].user_id == request.user_id) {
         return prisma.mutation.deleteIngredientList(
           {
             where: {
-              id: args.id
-            }
+              id: args.id,
+            },
           },
           info
         );
@@ -66,7 +66,7 @@ const IngredientList = {
     } else {
       throw new Error("Can't find Ingredient with that ID");
     }
-  }
+  },
 };
 
 export default IngredientList;

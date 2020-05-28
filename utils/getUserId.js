@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 const isLoggedIn = async (resolve, parent, args, ctx, info) => {
   const permit = () => {
@@ -8,14 +8,14 @@ const isLoggedIn = async (resolve, parent, args, ctx, info) => {
           return ctx.request.request.headers.authorization;
         } else if (
           ctx.request.request.headers.cookie &&
-          ctx.request.request.headers.cookie.includes("token=")
+          ctx.request.request.headers.cookie.includes('token=')
         ) {
           return ctx.request.request.headers.cookie
-            .split("; ")
+            .split('; ')
             .filter((cv) => {
-              return cv.includes("token");
+              return cv.includes('token');
             })[0]
-            .split("=")[1];
+            .split('=')[1];
         }
       }
     } else if (ctx.request.connection) {
@@ -29,8 +29,8 @@ const isLoggedIn = async (resolve, parent, args, ctx, info) => {
 
   if (ctx.request.request) {
     if (
-      ctx.request.request.body.query.includes("login") ||
-      ctx.request.request.body.query.includes("createUser")
+      ctx.request.request.body.query.includes('login') ||
+      ctx.request.request.body.query.includes('createUser')
     ) {
       return resolve();
     }
@@ -40,7 +40,7 @@ const isLoggedIn = async (resolve, parent, args, ctx, info) => {
     throw new Error(`Not authorised!`);
   }
 
-  const token = permit().replace("Bearer ", "");
+  const token = permit().replace('Bearer ', '');
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   if (!decoded || !decoded.userId) {
     throw new Error(`Not authorised!`);

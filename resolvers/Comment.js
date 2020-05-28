@@ -1,6 +1,6 @@
 const Comment = {
   post: {
-    fragment: "fragment postId on Post { id }",
+    fragment: 'fragment postId on Post { id }',
     resolve(parent, args, { prisma, request }, info) {
       if (request.user_id) {
         const postid = parent.post ? parent.post.id : parent.post_id;
@@ -15,7 +15,7 @@ const Comment = {
     },
   },
   user: {
-    fragment: "fragment userId on User { id }",
+    fragment: 'fragment userId on User { id }',
     resolve(parent, args, { prisma, request }, info) {
       if (request.user_id) {
         const user = parent.user ? parent.user.id : parent.user_id;

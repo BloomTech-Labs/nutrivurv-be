@@ -1,4 +1,4 @@
-const formatDate = require("../../utils/formatDate.js");
+const formatDate = require('../../utils/formatDate.js');
 
 const DailyRecords = {
   myDailyRecords(parent, args, { prisma, request }, info) {

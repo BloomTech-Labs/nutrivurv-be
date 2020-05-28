@@ -8,7 +8,10 @@
     "dev": "nodemon -r esm index.js --ext js,graphql",
     "test": "jest --watchAll --runInBand",
     "get-schema": "graphql get-schema -p prisma --dotenv .env",
-    "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
+    "coverage": "jest --coverage --detectOpenHandles --forceExit || true",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md)\""
   },
   "jest": {
     "testEnvironment": "node",
@@ -23,8 +26,12 @@
   },
   "devDependencies": {
     "codeclimate-test-reporter": "^0.5.1",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
     "jest": "^25.1.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "prettier": "^2.0.5"
   },
   "dependencies": {
     "axios": "^0.19.2",
