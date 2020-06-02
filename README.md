@@ -1,8 +1,8 @@
 # Nutrivurv API Documentation
 
-![Code Maintainability](https://api.codeclimate.com/v1/badges/9ac982aab59ee2c30f71/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9ac982aab59ee2c30f71/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/nutrition-tracker-be-pt7/maintainability)
 
-![Test Coverage](https://api.codeclimate.com/v1/badges/9ac982aab59ee2c30f71/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9ac982aab59ee2c30f71/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/nutrition-tracker-be-pt7/test_coverage)
 
 ## Backend deployed at [Heroku](https://labspt7-nutrition-tracker-be.herokuapp.com/)
 
