@@ -1,4 +1,5 @@
 import server from './server';
+import passport from 'passport'
 
 const opts = {
   port: process.env.PORT || 4000,
@@ -17,6 +18,8 @@ const opts = {
     subscriptions: '/subscriptions',
   },
 };
+
+server.use(passport.initialize());
 
 server.start(opts, () => {
   console.log('The server is up!');

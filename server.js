@@ -2,6 +2,7 @@ import { GraphQLServer, PubSub } from 'graphql-yoga';
 import { resolvers, fragmentReplacements } from './resolvers/index';
 import prisma from './prisma';
 import getUserId from './utils/getUserId.js';
+import passport from 'passport'
 
 const pubsub = new PubSub();
 
@@ -14,9 +15,11 @@ const server = new GraphQLServer({
       pubsub,
       prisma,
       request,
+      
     };
   },
   fragmentReplacements,
+  passport
 });
 
 export { server as default };

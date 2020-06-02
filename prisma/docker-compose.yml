@@ -13,11 +13,11 @@ services:
         databases:
           default:
             connector: postgres
-            host: ${env:DB_HOST}
-            database: ${env:DB_NAME}
+            host: ${DB_HOST}
+            database: ${DB_NAME}
             schema: public
-            user: ${env:DB_USER}
-            password: ${env:DB_PW}
+            user: ${DB_USER}
+            password: ${DB_PW}
             ssl: true
             rawAccess: true
             port: '5432'
