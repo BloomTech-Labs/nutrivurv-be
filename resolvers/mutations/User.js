@@ -1,27 +1,10 @@
-import thirdPartyAuth from '../../utils/thirdPartyAuth.js';
-
 import generateToken from '../../utils/generateToken.js';
 import hashPassword from '../../utils/hashPassword.js';
 import validateLogin from '../../utils/validateLogin.js';
 
 const User = {
   async createUser(parent, args, { request, prisma }, info) {
-    const auth0Token = request.request.headers.auth0;
-
-    const auth0User = auth0Token
-      ? await thirdPartyAuth(request.request.headers.auth0)
-      : '';
-
-    args.data = auth0User
-      ? {
-          name: auth0User.nickname,
-          email: auth0User.name,
-        }
-      : args.data;
-
-    const password = await hashPassword(
-      auth0User ? auth0User.sub : args.data.password
-    );
+    const password = await hashPassword(args.data.password);
 
     const user = await prisma.mutation.createUser({
       data: {
@@ -36,19 +19,13 @@ const User = {
     };
   },
   async login(parent, args, { request, prisma }, info) {
-    const auth0Token = request.request.headers.auth0;
-
-    const auth0User = auth0Token
-      ? await thirdPartyAuth(request.request.headers.auth0)
-      : '';
-
     const user = await prisma.query.user({
       where: {
-        email: auth0User ? auth0User.name : args.data.email,
+        email: args.data.email,
       },
     });
 
-    return validateLogin(auth0User ? auth0User.sub : args.data.password, user);
+    return validateLogin(args.data.password, user);
   },
   async deleteUser(parent, args, { prisma, request }, info) {
     return prisma.mutation.deleteUser(
