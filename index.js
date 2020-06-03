@@ -1,5 +1,5 @@
 import server from './server';
-import passport from 'passport'
+import passport from 'passport';
 
 const opts = {
   port: process.env.PORT || 4000,
