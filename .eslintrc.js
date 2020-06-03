@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     node: true,
-    commonjs: true,
+    commonjs: false,
     es6: true,
   },
   extends: ['eslint:recommended', 'plugin:prettier/recommended'],
