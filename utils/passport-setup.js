@@ -1,15 +1,18 @@
-const passport = require('passport')
-    ,LocalStrategy = require('passport-local').Strategy;
+const passport = require('passport');
+const { GraphQLLocalStrategy } = require("graphql-passport");
 
-passport.use(new LocalStrategy(
-    function(parent, args, { prisma }, info, done){
-        prisma.query.user({email: args.email}, function(err, user){
-            if(err) {return done(err);}
-            if(!user){
-                return done (null, false, {message: 'Email not found'})
-            }
-            if(!user.validPassword(args.password)) { return done(null, false); }
-            return done(null, user)
-        })
+passport.use(
+  new GraphQLLocalStrategy((parent, {email, password}, { prisma }, info, done) => {
+    try {
+      const users = await prisma.query.users();
+      const matchingUser = users.find(user => email === user.email && password === user.password);
+      const error = matchingUser ? null: new Error('no matching user');
+      return done(error, matchingUser);
     }
-))
+   catch (error) {
+    return done(error);
+  }
+    console.log(user);
+    return done(null, user);
+  })
+);
