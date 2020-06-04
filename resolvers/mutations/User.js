@@ -19,7 +19,7 @@ const User = {
     };
   },
   async login(parent, args, context, info) {
-    const { user } = await context.authenticate('graphql-local', {
+    const { user } = await context.passportAuth.authenticate('graphql-local', {
       email: args.data.email,
       password: args.data.password
     });
