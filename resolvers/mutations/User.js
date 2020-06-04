@@ -18,12 +18,17 @@ const User = {
       token: generateToken(user.id),
     };
   },
-  async login(parent, args, { request, prisma }, info) {
-    const user = await prisma.query.user({
-      where: {
-        email: args.data.email,
-      },
+  async login(parent, args, context, info) {
+    const { user } = await context.authenticate('graphql-local', {
+      email: args.data.email,
+      password: args.data.password
     });
+    console.log(user);
+    // const user = await context.prisma.query.user({
+    //   where: {
+    //     email: args.data.email,
+    //   },
+    // });
 
     return validateLogin(args.data.password, user);
   },
